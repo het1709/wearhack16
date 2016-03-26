@@ -3,26 +3,33 @@
 # python motion_detector.py --video videos/example_01.mp4
 
 # import the necessary packages
+from __future__ import print_function
+from imutils.object_detection import non_max_suppression
+from imutils import paths
+import numpy as np
 import argparse
-import datetime
 import imutils
-import time
 import cv2
+import datetime
+import time
+
+
+WEB_CAM_INDEX = 0
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
-ap.add_argument("-v", "--video", help="path to the video file")
 ap.add_argument("-a", "--min-area", type=int, default=500, help="minimum area size")
 args = vars(ap.parse_args())
 
-# if the video argument is None, then we are reading from webcam
-if args.get("video", None) is None:
-	camera = cv2.VideoCapture(0)
-	time.sleep(0.25)
+# we are reading from webcam
+camera = cv2.VideoCapture(WEB_CAM_INDEX)
+time.sleep(0.25)
 
-# otherwise, we are reading from a video file
-else:
-	camera = cv2.VideoCapture(args["video"])
+# initialize the HOG descriptor/person detector
+hog = cv2.HOGDescriptor()
+hog.setSVMDetector(cv2.HOGDescriptor_getDefaultPeopleDetector())
+
+
 
 # initialize the first frame in the video stream
 firstFrame = None
