@@ -59,13 +59,14 @@ def hello():
     orig = frame.copy()
 
     occupied = False
+    inColisionZone = False
 
-    # # draw the original bounding boxes
-    # for (x, y, w, h) in rects:
-    # 	if ( y + h ) < NEAREST_POINT:
-    # 		cv2.rectangle(orig, (x, y), (x + w, y + h), (255, 0, 0), 2)
-    # 	else:
-    # 		cv2.rectangle(orig, (x, y), (x + w, y + h), (0, 255, 0), 2)
+    # draw the original bounding boxes
+    for (x, y, w, h) in rects:
+    	if ( y + h ) < NEAREST_POINT:
+    		cv2.rectangle(orig, (x, y), (x + w, y + h), (255, 0, 0), 2)
+    	else:
+    		cv2.rectangle(orig, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
     # apply non-maxima suppression to the bounding boxes using a
     # fairly large overlap threshold to try to maintain overlapping
@@ -76,19 +77,21 @@ def hello():
     # draw the final bounding boxes
     for (xA, yA, xB, yB) in pick:
         occupied = True
-    	# if ( y + h ) < NEAREST_POINT:
-        #     occupied = True
-    	# 	cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
-    	# else:
-    	# 	cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+    	if ( y + h ) < NEAREST_POINT:
+    		cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
+    	else:
+            inColisionZone = True
+            cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
     # cleanup the camera and close any open windows
     camera.release()
     # cv2.destroyAllWindows()
 
     data = {
-        'isOccupied'  : occupied
+        'isOccupied'  : occupied,
+        'inColisionZone' : inColisionZone
     }
+    print (inColisionZone)
     resp = jsonify(data)
     resp.status_code = 200
 
@@ -96,7 +99,7 @@ def hello():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0')
 
 # # construct the argument parser and parse the arguments
 # ap = argparse.ArgumentParser()

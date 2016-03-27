@@ -69,8 +69,10 @@ orig = frame.copy()
 # draw the original bounding boxes
 for (x, y, w, h) in rects:
 	if ( y + h ) < NEAREST_POINT:
+		## Object is not in the collision zone
 		cv2.rectangle(orig, (x, y), (x + w, y + h), (255, 0, 0), 2)
 	else:
+		## Object is in the collision zone
 		cv2.rectangle(orig, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
 # apply non-maxima suppression to the bounding boxes using a
@@ -82,9 +84,12 @@ pick = non_max_suppression(rects, probs=None, overlapThresh=0.65)
 # draw the final bounding boxes
 for (xA, yA, xB, yB) in pick:
 	if ( y + h ) < NEAREST_POINT:
+		## Object is not in the collision zone
 		cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
 	else:
+		## Object is in the collision zone
 		cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+
 while True:
     cv2.imshow("Pedestrian Detector", frame)
     key = cv2.waitKey(1) & 0xFF
