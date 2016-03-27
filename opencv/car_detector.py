@@ -13,6 +13,7 @@ import cv2
 import datetime
 import time
 import copy
+
 # from flask import Flask
 #
 # app = Flask(__name__)
@@ -24,10 +25,11 @@ import copy
 # if __name__ == "__main__":
 #     app.run()
 
+SCALE_VAL = 2.00
 WEB_CAM_INDEX = 0
-WIN_STRIDE_VAL = 3
-NEAREST_POINT = WIN_STRIDE_VAL * 13
-FRAME_WIDTH = 500
+WIN_STRIDE_VAL = 4
+NEAREST_POINT = 315
+FRAME_WIDTH = 600
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
@@ -66,14 +68,13 @@ while True:
 
     # detect people in the image
 	(rects, weights) = hog.detectMultiScale(frame, winStride=(WIN_STRIDE_VAL, WIN_STRIDE_VAL),
-		padding=(8, 8), scale=1.05)
+		padding=(8, 8), scale=SCALE_VAL)
 
 	orig = frame.copy()
 
 	# draw the original bounding boxes
 	for (x, y, w, h) in rects:
-		print ('Detected')
-		if y >= 40:
+		if ( y + h ) < NEAREST_POINT:
 			cv2.rectangle(orig, (x, y), (x + w, y + h), (255, 0, 0), 2)
 		else:
 			cv2.rectangle(orig, (x, y), (x + w, y + h), (0, 255, 0), 2)
@@ -86,8 +87,8 @@ while True:
 
 	# draw the final bounding boxes
 	for (xA, yA, xB, yB) in pick:
-		print (yA)
-		if yA < NEAREST_POINT:
+		print (y + h)
+		if (y + h) < NEAREST_POINT:
 			cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
 		else:
 			cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
@@ -98,7 +99,6 @@ while True:
 	# if the `q` key is pressed, break from the lop
 	if key == ord("q"):
 		break
-	break
 
 # cleanup the camera and close any open windows
 camera.release()
