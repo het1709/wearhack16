@@ -4,7 +4,7 @@
         ""
     ],
     "companyName": "shababayub@gmail.com",
-    "longName": "httpRequest",
+    "longName": "test",
     "projectType": "pebblejs",
     "resources": {
         "media": [
@@ -32,12 +32,12 @@
         ]
     },
     "sdkVersion": "3",
-    "shortName": "httpRequest",
+    "shortName": "test",
     "targetPlatforms": [
         "aplite",
         "basalt"
     ],
-    "uuid": "03f41c6b-086e-4340-9df0-62afec443771",
+    "uuid": "56d053a7-e7f9-4040-ab5a-ebe6dca8d941",
     "versionCode": 1,
     "versionLabel": "1.0",
     "watchapp": {
