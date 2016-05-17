@@ -6,8 +6,8 @@ Shabab Ayub,
 Het Shah, 
 Sakib Ar Rahman 
 
-![alt text](http://postimg.org/image/9ci5mon0x/ "Process")
+![alt text](http://s32.postimg.org/wqq4ym4yd/process.png "Process")
 
-![alt text](http://postimg.org/image/rd4ocx2fl/ "Implementation")
+![alt text](http://s32.postimg.org/spse27gk5/demo.png "Implementation")
 
 
