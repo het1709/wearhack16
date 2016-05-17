@@ -1,13 +1,7 @@
-# wearhack16
-Works in WearHack 2016  
+# CONTEXT 
+Works in WearHack 2016 - Blind spot detector that sends vibrations to Pebble app for lane change assistance.
 Project by 
-
 Muhammad R Muhaimin
-
 Shabab Ayub   
-
-Junze Cao 
-
 Het Shah 
-
 Sakib Ar Rahman 
