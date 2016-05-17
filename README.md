@@ -6,6 +6,6 @@ Shabab Ayub,
 Het Shah, 
 Sakib Ar Rahman 
 
-![alt text](/process.png "The Process")
+![alt text](wearhack16/process.png "The Process")
 
-![alt text](/demp.png "Implementation")
+![alt text](wearhack16/demp.png "Implementation")
